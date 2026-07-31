@@ -17,6 +17,7 @@ updates:
       prefix: "chore(deps)"
     groups:
       npm-minor-and-patch:
+        applies-to: "version-updates"
         patterns:
           - "*"
         update-types:
@@ -39,5 +40,6 @@ updates:
       prefix: "chore(actions)"
     groups:
       github-actions:
+        applies-to: "version-updates"
         patterns:
           - "*"
