@@ -7,7 +7,6 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check",
     "deploy": "npm run build && wrangler pages deploy dist"
   },
   "dependencies": {
@@ -16,7 +15,6 @@
     "tailwindcss": "^4.1.0"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.0",
     "typescript": "^5.9.0",
     "wrangler": "^4.0.0"
   }
