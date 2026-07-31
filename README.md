@@ -1,14 +1,15 @@
 # My 10.0 Life — Astro 7
 
-A private, visual life-alignment website for Rahmatullah. The site presents the long-term business, family, wealth, team, service, and six-month execution vision.
+A personal visual life-alignment website for Rahmatullah. It presents the long-term business, family, wealth, team, service, and six-month execution vision.
 
 ## Stack
 
-- Astro 7
-- Tailwind CSS 4 through the Vite plugin
+- Astro 7.1.4
+- Tailwind CSS 4.3.3 through the Vite plugin
 - Static output
 - Cloudflare Pages
 - Zero React or Next.js runtime
+- Node.js 22.12.0 or newer
 
 ## Routes
 
@@ -41,7 +42,7 @@ Connect `rahmatullahboss/Offer-page` to Cloudflare Pages and use:
 - Production branch: `main`
 - Build command: `npm run build`
 - Build output directory: `dist`
-- Node version: `22`
+- Node version: `22.12.0`
 
 The repository also includes `wrangler.jsonc`. A manual deployment can be run with:
 
@@ -50,6 +51,8 @@ npm install
 npm run deploy
 ```
 
-## Privacy note
+## Privacy and security
 
-The site contains the uploaded personal photograph and AI-generated visualization images. A public Cloudflare deployment makes those images visible to anyone who can access the deployed URL.
+The site contains a personal photograph and AI-generated visualization images. It ships with search-engine blocking metadata, `robots.txt`, and Cloudflare Pages security headers. These controls discourage indexing but do not make a public URL private.
+
+For real access control, protect the deployed hostname with Cloudflare Access before sharing it. Until then, anyone who knows the deployment URL may be able to view the page and its images.
