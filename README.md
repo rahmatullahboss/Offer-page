@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# My 10.0 Life — Astro 7
 
-## Getting Started
+A personal visual life-alignment website for Rahmatullah. It presents the long-term business, family, wealth, team, service, and six-month execution vision.
 
-First, run the development server:
+## Stack
+
+- Astro 7.1.4
+- Tailwind CSS 4.3.3 through the Vite plugin
+- Static output
+- Cloudflare Pages
+- Zero React or Next.js runtime
+- Node.js 22.12.0 or newer
+
+## Routes
+
+- `/` — primary vision board
+- `/vision` — preserved vision-board route
+
+## Local development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Astro will print the local preview URL in the terminal.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Production build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run preview
+```
 
-## Learn More
+The static build is generated in `dist/`.
 
-To learn more about Next.js, take a look at the following resources:
+## Cloudflare Pages deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Connect `rahmatullahboss/Offer-page` to Cloudflare Pages and use:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Framework preset: Astro
+- Production branch: `main`
+- Build command: `npm run build`
+- Build output directory: `dist`
+- Node version: `22.12.0`
 
-## Deploy on Vercel
+The repository also includes `wrangler.jsonc`. A manual deployment can be run with:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm install
+npm run deploy
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Privacy and security
+
+The site contains a personal photograph and AI-generated visualization images. It ships with search-engine blocking metadata, `robots.txt`, and Cloudflare Pages security headers. These controls discourage indexing but do not make a public URL private.
+
+For real access control, protect the deployed hostname with Cloudflare Access before sharing it. Until then, anyone who knows the deployment URL may be able to view the page and its images.
