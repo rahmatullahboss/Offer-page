@@ -1,0 +1,274 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { HERO_PHOTO } from "../app/vision/photo";
+import { VISION_PHOTO_1 } from "../app/vision/generated/photo1";
+import { VISION_PHOTO_2 } from "../app/vision/generated/photo2";
+import { VISION_MANSION } from "../app/vision/generated/mansion";
+import { VISION_COMMUNITY } from "../app/vision/generated/community";
+import { VISION_BOARDROOM } from "../app/vision/generated/boardroom";
+
+const metrics = [
+  ["৳৩০L–৳১Cr", "মাসিক digital-product income"],
+  ["$100M+", "দীর্ঘমেয়াদি company value"],
+  ["৳১০০Cr", "real-estate portfolio vision"],
+  ["A-Team", "founder-independent operations"],
+];
+
+const pillars = [
+  {
+    number: "01",
+    label: "Business",
+    title: "বিশ্বমানের digital products ও mobile apps",
+    text: "মানুষের বাস্তব সমস্যা সমাধান করে এমন products—যেগুলো recurring revenue তৈরি করে এবং international market-এ scale করে।",
+  },
+  {
+    number: "02",
+    label: "Company Value",
+    title: "$100M+ valuation-এর system-driven company",
+    text: "Technology, revenue, governance, brand ও leadership এমনভাবে গড়ে ওঠে—যাতে কোম্পানি একজন founder-এর উপস্থিতির ওপর নির্ভরশীল না থাকে।",
+  },
+  {
+    number: "03",
+    label: "Family & Freedom",
+    title: "শান্ত পরিবার, নিজস্ব বাড়ি ও সময়ের স্বাধীনতা",
+    text: "সাফল্যের সাথে পরিবার, ঈমান, স্বাস্থ্য, সম্পর্ক ও মানসিক শান্তি—সবকিছুকে একই জীবনের অংশ হিসেবে রক্ষা করা।",
+  },
+  {
+    number: "04",
+    label: "Assets & Impact",
+    title: "Income-producing assets ও মানুষের টেকসই উপকার",
+    text: "Business income-কে disciplined investment, real estate এবং শিক্ষা, চিকিৎসা, কাজ ও entrepreneurship support-এ রূপান্তর করা।",
+  },
+];
+
+const gallery = [
+  {
+    src: VISION_PHOTO_1,
+    alt: "A founder leading an autonomous digital-product team in a modern office",
+    eyebrow: "Company",
+    title: "Founder & Elite Team",
+    text: "দক্ষ leadership team ownership নিয়ে কাজ করে; founder সবচেয়ে গুরুত্বপূর্ণ strategy, product ও capital-allocation decision-এ মনোযোগ দেয়।",
+  },
+  {
+    src: VISION_PHOTO_2,
+    alt: "A peaceful family together outside a modern home",
+    eyebrow: "Family",
+    title: "Peaceful Family Life",
+    text: "জীবনসঙ্গী ও সন্তানদের নিয়ে নিরাপদ, ভালোবাসাপূর্ণ, মূল্যবোধকেন্দ্রিক এবং শান্ত পারিবারিক জীবন।",
+  },
+  {
+    src: VISION_MANSION,
+    alt: "A modern residence with a premium black car in front",
+    eyebrow: "Assets",
+    title: "Home, Cars & Real Estate",
+    text: "নিজস্ব বাড়ি, প্রয়োজনীয় premium vehicles এবং প্রায় ৳১০০ কোটি income-producing real-estate portfolio।",
+  },
+  {
+    src: VISION_COMMUNITY,
+    alt: "A respectful community gathering focused on practical support",
+    eyebrow: "Service",
+    title: "Community Impact",
+    text: "আত্মীয়, প্রতিবেশী ও সমাজের মানুষের জন্য শিক্ষা, চিকিৎসা, কাজ, mentoring এবং sustainable support তৈরি করা।",
+  },
+  {
+    src: VISION_BOARDROOM,
+    alt: "An executive team discussing a major company milestone in a boardroom",
+    eyebrow: "Scale",
+    title: "$100M+ Strategic Milestone",
+    text: "একটি acquisition-ready company—যার systems, governance, product strength ও leadership আন্তর্জাতিক মানের।",
+  },
+];
+
+const bridge = [
+  ["One flagship", "একটি flagship product-কে প্রধান growth engine করা"],
+  ["Revenue proof", "Acquisition, activation, retention ও pricing metrics স্থির করা"],
+  ["Autonomous team", "Clear ownership, SOP, dashboard এবং decision rules বসানো"],
+  ["Asset discipline", "Income allocation, compliance ও investment policy লিখিত করা"],
+  ["Family rhythm", "কাজ, স্বাস্থ্য, ইবাদত ও পরিবারের জন্য protected time রাখা"],
+  ["Impact system", "সহায়তাকে transparent, repeatable ও dignity-first করা"],
+];
+---
+
+<BaseLayout
+  title="My 10.0 Life Vision | Rahmatullah"
+  description="Rahmatullah's private visual vision board for business, family, wealth, leadership, service, and freedom."
+>
+  <main class="min-h-screen overflow-hidden bg-[#06110d] text-[#f8f2e5] selection:bg-[#d9b96f] selection:text-[#06110d]">
+    <nav class="sticky top-0 z-50 border-b border-white/10 bg-[#06110d]/90 backdrop-blur-xl">
+      <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8 lg:px-12">
+        <a href="#top" class="flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.16em]">
+          <span class="grid h-9 w-9 place-items-center rounded-full border border-[#d9b96f]/60 text-[#e9d39c]">10</span>
+          My 10.0 Life
+        </a>
+        <div class="hidden items-center gap-6 text-sm text-white/55 md:flex">
+          <a href="#pillars" class="transition hover:text-white">Pillars</a>
+          <a href="#visuals" class="transition hover:text-white">All Visuals</a>
+          <a href="#bridge" class="transition hover:text-white">6-Month Bridge</a>
+        </div>
+        <span class="rounded-full border border-[#d9b96f]/25 bg-[#d9b96f]/10 px-3 py-1.5 text-xs text-[#ecd89f]">
+          The life I am building
+        </span>
+      </div>
+    </nav>
+
+    <section id="top" class="relative isolate">
+      <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_78%_18%,rgba(217,185,111,0.17),transparent_30%),radial-gradient(circle_at_8%_88%,rgba(40,116,80,0.22),transparent_36%)]"></div>
+      <div class="mx-auto grid min-h-[88vh] max-w-7xl items-center gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[1.05fr_.95fr] lg:px-12 lg:py-20">
+        <div>
+          <p class="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.28em] text-[#d9b96f]">
+            <span class="h-px w-10 bg-current"></span>
+            Rahmatullah's living vision board
+          </p>
+          <h1 class="mt-7 text-5xl font-semibold leading-[0.98] tracking-[-0.045em] sm:text-6xl lg:text-7xl xl:text-8xl">
+            সম্পদ, স্বাধীনতা ও
+            <span class="block font-serif italic text-[#d9b96f]">মানুষের উপকার।</span>
+          </h1>
+          <p class="mt-8 max-w-2xl text-base leading-8 text-white/62 sm:text-lg">
+            আমি একটি বড় technology business গড়ে তুলছি—যেখানে digital products ও mobile apps মানুষের বাস্তব সমস্যা সমাধান করে, শক্তিশালী আয় তৈরি করে এবং পরিবার ও সমাজের জন্য দীর্ঘস্থায়ী কল্যাণের উৎস হয়।
+          </p>
+          <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+            <a href="#visuals" class="inline-flex items-center justify-center rounded-full bg-[#d9b96f] px-6 py-3.5 text-sm font-semibold text-[#06110d] transition hover:bg-[#ecd79f]">
+              View the complete vision
+            </a>
+            <a href="#bridge" class="inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-3.5 text-sm font-semibold text-white/80 transition hover:border-white/35 hover:text-white">
+              See the reality bridge
+            </a>
+          </div>
+          <div class="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-4">
+            {metrics.map(([value, label]) => (
+              <div class="bg-[#091912]/96 p-4 sm:p-5">
+                <div class="text-xl font-semibold text-[#f0dba6] sm:text-2xl">{value}</div>
+                <div class="mt-1 text-[11px] leading-4 text-white/42">{label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="relative mx-auto w-full max-w-xl lg:ml-auto">
+          <div class="absolute -right-8 bottom-12 h-48 w-48 rounded-full bg-[#287450]/25 blur-3xl"></div>
+          <figure class="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 p-2 shadow-2xl shadow-black/45">
+            <div class="relative aspect-[4/5] overflow-hidden rounded-[1.55rem]">
+              <img src={HERO_PHOTO} alt="Rahmatullah with his life partner" class="h-full w-full object-cover object-center" loading="eager" fetchpriority="high" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#06110d] via-transparent to-transparent"></div>
+              <figcaption class="absolute inset-x-0 bottom-0 p-6 sm:p-8">
+                <p class="text-xs uppercase tracking-[0.26em] text-[#ecd89f]">My why</p>
+                <p class="mt-3 text-xl font-medium leading-8 sm:text-2xl">
+                  একটি শান্ত পরিবার, একটি অর্থবহ business এবং এমন সম্পদ—যা মানুষের জীবন সহজ করে।
+                </p>
+              </figcaption>
+            </div>
+          </figure>
+          <div class="absolute -bottom-5 -left-2 rounded-2xl border border-[#d9b96f]/30 bg-[#10251c]/95 p-4 shadow-xl sm:-left-7 sm:p-5">
+            <p class="text-xs uppercase tracking-[0.2em] text-white/40">Identity</p>
+            <p class="mt-1 text-sm font-medium">Builder · Provider · Problem Solver</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pillars" class="border-y border-white/10 bg-[#091912]">
+      <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
+        <div class="max-w-3xl">
+          <p class="text-xs font-semibold uppercase tracking-[0.28em] text-[#d9b96f]">Four foundations</p>
+          <h2 class="mt-5 text-4xl font-semibold tracking-[-0.035em] sm:text-5xl">একটি সম্পূর্ণ জীবন—শুধু বড় income নয়।</h2>
+          <p class="mt-5 text-base leading-8 text-white/55 sm:text-lg">
+            Business, family, assets এবং service—চারটি অংশ একসাথে শক্তিশালী হলেই এই vision বাস্তব অর্থ পায়।
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10 md:grid-cols-2">
+          {pillars.map((pillar) => (
+            <article class="bg-[#0b1d15] p-7 sm:p-9">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-semibold uppercase tracking-[0.24em] text-[#d9b96f]">{pillar.label}</span>
+                <span class="font-serif text-3xl italic text-white/18">{pillar.number}</span>
+              </div>
+              <h3 class="mt-8 text-2xl font-semibold leading-9 tracking-[-0.02em]">{pillar.title}</h3>
+              <p class="mt-4 leading-7 text-white/52">{pillar.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="visuals" class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
+      <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+        <div class="max-w-3xl">
+          <p class="text-xs font-semibold uppercase tracking-[0.28em] text-[#d9b96f]">Complete visual map</p>
+          <h2 class="mt-5 text-4xl font-semibold tracking-[-0.035em] sm:text-5xl">প্রতিটি গুরুত্বপূর্ণ vision এখন আলাদা ছবিতে।</h2>
+        </div>
+        <p class="max-w-md text-sm leading-7 text-white/48">
+          Company, family, home and assets, community service এবং $100M milestone—কোনোটিই collage-এর ভেতরে লুকানো নয়।
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-2">
+        {gallery.map((item, index) => (
+          <article class:list={["group overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#0a1a14]", index === 0 && "md:col-span-2"]}>
+            <div class:list={["relative overflow-hidden", index === 0 ? "aspect-[16/8]" : "aspect-[4/3]"]}>
+              <img src={item.src} alt={item.alt} class="h-full w-full object-cover transition duration-700 group-hover:scale-[1.025]" loading="lazy" decoding="async" />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#06110d] via-[#06110d]/10 to-transparent"></div>
+            </div>
+            <div class="p-6 sm:p-8">
+              <p class="text-xs font-semibold uppercase tracking-[0.24em] text-[#d9b96f]">{item.eyebrow}</p>
+              <h3 class="mt-3 text-2xl font-semibold tracking-[-0.02em] sm:text-3xl">{item.title}</h3>
+              <p class="mt-4 max-w-3xl leading-7 text-white/52">{item.text}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-y border-white/10 bg-[#0a1b14]">
+      <div class="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:px-12 lg:py-28">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.28em] text-[#d9b96f]">Operating identity</p>
+          <h2 class="mt-5 text-4xl font-semibold tracking-[-0.035em] sm:text-5xl">যে মানুষটি এই জীবন তৈরি করবে।</h2>
+        </div>
+        <div class="space-y-4">
+          {[
+            "আমি একজন সুস্থ, স্থির ও দূরদর্শী technology founder।",
+            "আমি গুরুত্বপূর্ণ কাজ শেষ করি; নতুন আকর্ষণে বারবার দিক পরিবর্তন করি না।",
+            "আমার business system, leadership এবং data দিয়ে চলে।",
+            "আমি পরিবার, ঈমান, স্বাস্থ্য ও চরিত্রকে সাফল্যের মূল্য হিসেবে বিসর্জন দিই না।",
+            "আমি মানুষকে শুধু সাময়িক টাকা নয়—সম্ভব হলে টেকসই সমাধান দিই।",
+          ].map((statement, index) => (
+            <div class="flex gap-4 rounded-2xl border border-white/8 bg-white/[0.025] p-5">
+              <span class="text-sm font-semibold text-[#d9b96f]">0{index + 1}</span>
+              <p class="leading-7 text-white/72">{statement}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="bridge" class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
+      <div class="rounded-[2rem] border border-[#d9b96f]/25 bg-[linear-gradient(135deg,rgba(217,185,111,0.12),rgba(35,105,74,0.12))] p-7 sm:p-10 lg:p-14">
+        <div class="grid gap-8 lg:grid-cols-[.85fr_1.15fr] lg:items-start">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-[#d9b96f]">The next six months</p>
+            <h2 class="mt-5 text-4xl font-semibold tracking-[-0.035em] sm:text-5xl">Vision থেকে measurable reality.</h2>
+            <p class="mt-5 leading-8 text-white/55">
+              বড় ভবিষ্যৎ প্রতিদিনের disciplined execution-এর ফল। এই ছয়টি focus area vision-কে কল্পনা থেকে operating system-এ রূপান্তর করবে।
+            </p>
+          </div>
+          <div class="grid gap-3 sm:grid-cols-2">
+            {bridge.map(([title, text], index) => (
+              <div class="rounded-2xl border border-white/10 bg-[#07140f]/65 p-5">
+                <div class="flex items-center justify-between">
+                  <h3 class="font-semibold text-[#f1dfb3]">{title}</h3>
+                  <span class="text-xs text-white/28">0{index + 1}</span>
+                </div>
+                <p class="mt-3 text-sm leading-6 text-white/50">{text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="border-t border-white/10 px-5 py-10 text-center text-sm text-white/35">
+      My 10.0 Life · Built through clarity, systems, discipline and service.
+    </footer>
+  </main>
+</BaseLayout>
