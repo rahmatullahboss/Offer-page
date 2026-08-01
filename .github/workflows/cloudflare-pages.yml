@@ -1,6 +1,9 @@
 name: Deploy Cloudflare Pages
 
 on:
+  pull_request:
+    branches:
+      - main
   push:
     branches:
       - main
@@ -13,16 +16,18 @@ permissions:
   issues: write
 
 concurrency:
-  group: cloudflare-pages-${{ github.ref_name }}
+  group: cloudflare-pages-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   build-and-deploy:
+    if: ${{ github.event_name != 'pull_request' || github.head_ref == 'feature/10-0-life-vision' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      DEPLOY_BRANCH: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
 
     steps:
       - name: Checkout
@@ -49,9 +54,9 @@ jobs:
           command: >-
             pages deploy dist
             --project-name=rahmatullah-10-life
-            --branch=${{ github.ref_name }}
+            --branch=${{ env.DEPLOY_BRANCH }}
             --commit-hash=${{ github.sha }}
-            --commit-message="${{ github.event.head_commit.message || 'Manual deployment' }}"
+            --commit-message="${{ github.event.head_commit.message || github.event.pull_request.title || 'Manual deployment' }}"
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Explain skipped deployment
@@ -66,18 +71,20 @@ jobs:
         env:
           DEPLOY_OUTCOME: ${{ steps.cloudflare.outcome }}
           DEPLOYMENT_URL: ${{ steps.cloudflare.outputs.deployment-url }}
+          DEPLOY_BRANCH: ${{ env.DEPLOY_BRANCH }}
         with:
           script: |
             const outcome = process.env.DEPLOY_OUTCOME || 'not-run';
             const deploymentUrl = process.env.DEPLOYMENT_URL || '';
+            const branch = process.env.DEPLOY_BRANCH || context.ref.replace('refs/heads/', '');
             const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
-            const mode = context.ref === 'refs/heads/main' ? 'production' : 'preview';
+            const mode = branch === 'main' ? 'production' : 'preview';
             const body = [
               `## Cloudflare ${mode} deployment`,
               '',
               `- Result: **${outcome}**`,
               deploymentUrl ? `- URL: ${deploymentUrl}` : '- URL: not returned',
-              `- Branch: \`${context.ref.replace('refs/heads/', '')}\``,
+              `- Branch: \`${branch}\``,
               `- Workflow run: ${runUrl}`,
               `- Commit: \`${context.sha}\``
             ].join('\n');
