@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - feature/10-0-life-vision
   workflow_dispatch:
 
 permissions:
@@ -11,7 +12,7 @@ permissions:
   deployments: write
 
 concurrency:
-  group: cloudflare-pages-production
+  group: cloudflare-pages-${{ github.ref_name }}
   cancel-in-progress: true
 
 jobs:
@@ -49,7 +50,7 @@ jobs:
             --project-name=rahmatullah-10-life
             --branch=${{ github.ref_name }}
             --commit-hash=${{ github.sha }}
-            --commit-message="${{ github.event.head_commit.message || 'Manual production deployment' }}"
+            --commit-message="${{ github.event.head_commit.message || 'Manual deployment' }}"
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Explain skipped deployment
