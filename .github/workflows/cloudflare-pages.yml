@@ -13,7 +13,6 @@ on:
 permissions:
   contents: read
   deployments: write
-  issues: write
 
 concurrency:
   group: cloudflare-pages-${{ github.event_name }}-${{ github.ref }}
@@ -28,6 +27,7 @@ jobs:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       DEPLOY_BRANCH: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
+      DEPLOY_COMMIT: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
 
     steps:
       - name: Checkout
@@ -44,8 +44,34 @@ jobs:
       - name: Build Astro site
         run: npm run build
 
+      - name: Ensure Cloudflare Pages project exists
+        if: ${{ env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != '' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          project_url="https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects/rahmatullah-10-life"
+          http_code="$(curl --silent --show-error --output project-response.json --write-out '%{http_code}' \
+            --header "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+            --header "Content-Type: application/json" \
+            "${project_url}")"
+
+          if [[ "${http_code}" == "404" ]]; then
+            echo "Cloudflare Pages project does not exist; creating it."
+            curl --fail-with-body --silent --show-error \
+              --request POST \
+              --url "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/pages/projects" \
+              --header "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+              --header "Content-Type: application/json" \
+              --data '{"name":"rahmatullah-10-life","production_branch":"main"}'
+          elif [[ "${http_code}" != "200" ]]; then
+            echo "Unable to inspect the Cloudflare Pages project (HTTP ${http_code})."
+            cat project-response.json
+            exit 1
+          else
+            echo "Cloudflare Pages project already exists."
+          fi
+
       - name: Deploy to Cloudflare Pages
-        id: cloudflare
         if: ${{ env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != '' }}
         uses: cloudflare/wrangler-action@v3
         with:
@@ -55,7 +81,7 @@ jobs:
             pages deploy dist
             --project-name=rahmatullah-10-life
             --branch=${{ env.DEPLOY_BRANCH }}
-            --commit-hash=${{ github.sha }}
+            --commit-hash=${{ env.DEPLOY_COMMIT }}
             --commit-message="${{ github.event.head_commit.message || github.event.pull_request.title || 'Manual deployment' }}"
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
@@ -64,33 +90,3 @@ jobs:
         run: |
           echo "Astro build completed, but deployment was skipped."
           echo "Add CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID as GitHub repository secrets."
-
-      - name: Report deployment on PR
-        if: ${{ always() }}
-        uses: actions/github-script@v7
-        env:
-          DEPLOY_OUTCOME: ${{ steps.cloudflare.outcome }}
-          DEPLOYMENT_URL: ${{ steps.cloudflare.outputs.deployment-url }}
-          DEPLOY_BRANCH: ${{ env.DEPLOY_BRANCH }}
-        with:
-          script: |
-            const outcome = process.env.DEPLOY_OUTCOME || 'not-run';
-            const deploymentUrl = process.env.DEPLOYMENT_URL || '';
-            const branch = process.env.DEPLOY_BRANCH || context.ref.replace('refs/heads/', '');
-            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
-            const mode = branch === 'main' ? 'production' : 'preview';
-            const body = [
-              `## Cloudflare ${mode} deployment`,
-              '',
-              `- Result: **${outcome}**`,
-              deploymentUrl ? `- URL: ${deploymentUrl}` : '- URL: not returned',
-              `- Branch: \`${branch}\``,
-              `- Workflow run: ${runUrl}`,
-              `- Commit: \`${context.sha}\``
-            ].join('\n');
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: 2,
-              body,
-            });
