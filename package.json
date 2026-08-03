@@ -14,11 +14,11 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "4.3.3",
-    "astro": "7.1.4",
+    "astro": "7.1.6",
     "tailwindcss": "4.3.3"
   },
   "devDependencies": {
     "typescript": "5.9.3",
-    "wrangler": "4.114.0"
+    "wrangler": "4.116.0"
   }
 }
